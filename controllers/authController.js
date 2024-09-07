@@ -1,5 +1,6 @@
 import { hashPassword } from "../helpers/authHelper.js";
-import usermodel from "../models/usermodel.js"
+import User from "../models/user.js";
+import jwt from 'jsonwebtoken'
 export const registerController = async (req, res) => {
   try {
     const { name, email, password, phone, address } = req.body;
@@ -11,7 +12,7 @@ export const registerController = async (req, res) => {
       });
     }
 
-    const existingUser = await usermodel.findOne({ email });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
         success: false,
@@ -23,7 +24,7 @@ export const registerController = async (req, res) => {
     const hashedPassword = await hashPassword(password);
 
     
-    const user = new usermodel({
+    const user = new User({
       name,
       email,
       phone,
@@ -31,6 +32,7 @@ export const registerController = async (req, res) => {
       password: hashedPassword,
     });
     await user.save();
+  
 
     res.status(201).json({
       success: true,
@@ -47,3 +49,7 @@ export const registerController = async (req, res) => {
     });
   }
 };
+
+export const loginController = () =>{
+  
+}
