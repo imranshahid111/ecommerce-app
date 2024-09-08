@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../Components/Layout/Layout'
 import toast from 'react-hot-toast';
+import styles from "../../Styles/authStyles.css"
 
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
@@ -32,9 +33,10 @@ const HandleSubmit = async(e) => {
   return (
 
     <Layout>
-<div className='register'>
-<h1>Register Page</h1>
-<form onSubmit={HandleSubmit} style={{width:"263px"}}>
+<div className='form-container'>
+
+<form onSubmit={HandleSubmit} >
+<h4 className='title'>REGISTER FORM</h4>
   <div className="mb-3">
     <input type="type" value={name} onChange={(e)=>setname(e.target.value)} className="form-control" id="exampleInputName" required placeholder="Enter Your Name"  />
   </div>
@@ -51,7 +53,7 @@ const HandleSubmit = async(e) => {
     <input type="text" value={address} onChange={(e)=>setaddress(e.target.value)} className="form-control" id="exampleInputPassword" required placeholder="Enter Your address" />
   </div>
  
-  <button type="submit" className="btn btn-primary">Submit</button>
+  <button type="submit" className="btn btn-primary">REGISTER</button>
 </form>
 
 </div>
