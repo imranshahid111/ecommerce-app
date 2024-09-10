@@ -14,7 +14,7 @@ try {
 export const isAdmin = async (req, res , next) =>{
     try {
         const user = await User.findById(req.user._id)
-        if(!user.role !== 1)
+        if(user.role !== 1)
         {
             return res.status(401).send(
                 {
@@ -28,5 +28,10 @@ export const isAdmin = async (req, res , next) =>{
         }
     } catch (error) {
         console.log(error)
+        res.status(401).send({
+            success: false,
+            error,
+            message: "Error in admin middelware",
+          });
     }
 }

@@ -8,6 +8,10 @@ const HomePage = () => {
   return (
 <Layout>
     <h1>Home page</h1>
+
+    <pre>
+      {JSON.stringify(auth , null , 4)}
+    </pre>
 </Layout>
 )
 }

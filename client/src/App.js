@@ -9,6 +9,8 @@ import Register from "./Pages/Auth/Register";
 import Dashboard from "./User/Dashboard";
 import PrivateRoute from "./Components/Routes/Private";
 import ForgetPassword from "./Pages/Auth/ForgetPassword";
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import AdminRoute from "./Components/Routes/AdminRoute";
 
 function App() {
   return (
@@ -17,7 +19,11 @@ function App() {
         <Route path='/' element={<HomePage/>} />
         <Route path='/about' element={<About/>} />
         <Route path='/dashboard' element={<PrivateRoute/>}>
-        <Route path='' element={<Dashboard/>}/></Route>
+            <Route path='user' element={<Dashboard/>}/>
+        </Route>
+        <Route path='/dashboard' element={<AdminRoute/>}>
+            <Route path='admin' element={<AdminDashboard/>}/>
+        </Route>
         <Route path='/contact' element={<Contact/>} />
         <Route path='/forgot-password' element={<ForgetPassword />} />
         <Route path='/policy' element={<Policy/>} />

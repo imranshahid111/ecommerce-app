@@ -16,7 +16,7 @@ function Header() {
     toast.success('Logout Successfull')
   }
   return (
-    <>
+    <> 
    <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
     <Link className="navbar-brand" ><FaShopify style={{ fontSize: '35px', paddingBottom:'7px' }} /> Ecommerce app</Link>
@@ -49,7 +49,10 @@ function Header() {
           </NavLink>
           <ul className="dropdown-menu">
             <li>
-              <NavLink to={'/dashboard'} className="dropdown-item bg-white text-black">Dashboard</NavLink></li>
+              <NavLink to={`/dashboard/${
+                auth?.user?.role === 1 ? "admin" : "user"
+              }`}
+               className="dropdown-item bg-white text-black">Dashboard</NavLink></li>
               
             <li>
               <NavLink onClick={handleLogout} to={'/login'} className="dropdown-item bg-white text-black">Logout</NavLink></li>
