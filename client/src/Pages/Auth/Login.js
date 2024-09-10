@@ -3,7 +3,7 @@ import Layout from '../../Components/Layout/Layout'
 import toast from 'react-hot-toast';
 import styles from "../../Styles/authStyles.css"
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/Auth';
 
 
@@ -14,6 +14,7 @@ const Login = () => {
 
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const HandleSubmit = async(e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ const Login = () => {
             token : res.data.token,   
           })
           localStorage.setItem('auth', JSON.stringify(res.data))
-            navigate('/')
+            navigate(location.state || '/')
           }
           else{
             toast.error(res.data.message);
@@ -52,7 +53,9 @@ const Login = () => {
         <input type="password" value={password} onChange={(e)=>setpassword(e.target.value)} className="form-control" id="exampleInputPassword" required placeholder="Enter Your Password" />
       </div>
     
-     
+    <div className='mb-3'>
+      <button type="submit" className="btn btn-primary" onClick={()=>navigate('/forgot-password')}>FORGOT PASSWORD</button>
+    </div>
       <button type="submit" className="btn btn-primary">LOGIN</button>
     </form>
     
