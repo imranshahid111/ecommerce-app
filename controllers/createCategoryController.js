@@ -31,3 +31,82 @@ export const createCategoryController = async (req, res) => {
     });
   }
 };
+
+export const updateCategoryController = async( req ,res) =>{
+try {
+  const {name} = req.body
+  const {id} = req.params
+  const category = await categoryModel.findByIdAndUpdate( id,{name, slug:slugify(name)},{new :true})
+  res.status(200).send({
+    success : true,
+    message : "Category Updated Successfully",
+    category,
+  })
+} catch (error) {
+ console.log(error);
+ res.status(500).send({
+  success : false,
+  message : 'Error while updating category'
+ }) 
+}
+}
+
+
+export const Category = async(req , res) =>{
+try {
+  const category = await categoryModel.find({})
+  res.status(200).send(
+    {
+      success : true,
+      message : "All Category List",
+      category,
+    }
+  )
+} catch (error) {
+  console.log(error)
+  res.status(500).send({
+    success : false,
+    message : "Error in All Category",
+    error,
+  })
+}
+
+}
+
+export const SingleCategory = async(req , res) => {
+try {
+  const SingleCategory = await categoryModel.findOne({slug:req.params.slug}) 
+  res.status(200).send({
+    success : true,
+    message : "Single Category Successfully loaded",
+    SingleCategory,
+  })
+} catch (error) {
+  console.log(error)
+  res.status(500).send({
+    success : false,
+    message : 'Error in Single Category',
+    error,
+  })
+}
+}
+
+
+
+
+export const DeleteCategory = async(req , res)=>{
+try {
+  const {id} = req.params
+  await categoryModel.findByIdAndDelete(id);
+  res.status(200).send({
+    success  : true,
+    message : "Deleted Successfully",
+  })
+} catch (error) {
+  console.log(error)
+res.status(500).send({
+  success : false,
+  message : "error in deletion"
+})
+}
+}
